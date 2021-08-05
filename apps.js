@@ -83,7 +83,7 @@ function searchByName(people){
   return foundPerson;
 }
 
-//unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
+// unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
 // function searchByEyeColor(people){
 //   let eyeColorSearch = promptFor("What eye colored person list you searching for?", nameValidation);
 //   let foundPerson = people.filter(function(potentialMatch){
@@ -94,7 +94,7 @@ function searchByName(people){
 //       return false;
 //     }
 //   })
-//   // TODO: find the person single person object using the name they entered.
+//   // TODO: find the person us
 //   return foundPerson;
 // }
 
