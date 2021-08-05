@@ -98,9 +98,35 @@ function searchByName(people){
 //   return foundPerson;
 // }
 
+// gender search
+// function searchByGender(people){
+//   let genderSearch = promptFor("What gender is the person you are searching for?", nameValidation);
+//   let foundPerson = people.filter(function(potentialMatch){
+//     if(potentialMatch.gender === genderSearch){
+//       return true;
+//     }
+//     else{
+//       return false;
+//     }
+//   })
+//   // TODO: find the person us
+//   return foundPerson;
+// }
 
-//TODO: add other trait filter functions here.
-
+// occupation search
+// function searchByOccupation(people){
+//   let occupationSearch = promptFor("What occupation does the person youre looking for have?", nameValidation);
+//   let foundPerson = people.filter(function(potentialMatch){
+//     if(potentialMatch.occupation === occupationSearch){
+//       return true;
+//     }
+//     else{
+//       return false;
+//     }
+//   })
+//   // TODO: find the person us
+//   return foundPerson;
+// }
 
 
 //#endregion
