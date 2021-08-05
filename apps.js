@@ -41,7 +41,11 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-    // TODO: get person's info
+      function getValue() {
+        return localStorage.getItem('id, dob, gender, height, weight, eyeColor,occupation');
+      } // Gets the value of 'nameOfItem' and returns it
+      console.log(getValue()); //'value';
+
     break;
     case "family":
     // TODO: get person's family
@@ -128,7 +132,20 @@ function searchByName(people){
 //   return foundPerson;
 // }
 
-
+// ID search
+// function searchByID(people){
+//   let occupationSearch = promptFor("What ID number does the person youre searcing for have?", nameValidation);
+//   let foundPerson = people.filter(function(potentialMatch){
+//     if(potentialMatch.ID === occupationSearch){
+//       return true;
+//     }git
+//     else{
+//       return false;
+//     }
+//   })
+//   // TODO: find the person us
+//   return foundPerson;
+// }
 //#endregion
 
 //Display functions.
