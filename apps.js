@@ -70,8 +70,8 @@ function mainMenu(person, people){
 
 //nearly finished function used to search through an array of people to find matching first and last name and return a SINGLE person object.
 function searchByName(people){
-  let firstName = promptFor("What is the person's first name?", autoValid);
-  let lastName = promptFor("What is the person's last name?", autoValid);
+  let firstName = promptFor("What is the person's first name?", nameValidation);
+  let lastName = promptFor("What is the person's last name?", nameValidation);
 
   let foundPerson = people.filter(function(potentialMatch){
     if(potentialMatch.firstName === firstName && potentialMatch.lastName === lastName){
@@ -155,7 +155,15 @@ function yesNo(input){
 function autoValid(input){
   return true; // default validation only
 }
-
+//
+function nameValidation(input){
+    if(input != null && typeof input === "string" && input.length > 1 && isNaN(parseFloat(input)) ){
+      return true;
+    }
+    else{
+      return false;
+    }
+    }
 //Unfinished validation function you can use for any of your custom validation callbacks.
 //can be used for things like eye color validation for example.
 function customValidation(input){
