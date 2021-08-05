@@ -13,6 +13,7 @@ function app(people){
   switch(searchType){
     case 'yes':
       searchResults = searchByName(people);
+      //searchResults = searchByEyeColor(people);
       break;
     case 'no':
       // TODO: search by traits
@@ -67,8 +68,8 @@ function mainMenu(person, people){
 
 //nearly finished function used to search through an array of people to find matching first and last name and return a SINGLE person object.
 function searchByName(people){
-  let firstName = promptFor("What is the person's first name?", autoValid);
-  let lastName = promptFor("What is the person's last name?", autoValid);
+  let firstName = promptFor("What is the person's first name?", nameValidation);
+  let lastName = promptFor("What is the person's last name?", nameValidation);
 
   let foundPerson = people.filter(function(potentialMatch){
     if(potentialMatch.firstName === firstName && potentialMatch.lastName === lastName){
@@ -78,14 +79,25 @@ function searchByName(people){
       return false;
     }
   })
-  // TODO: find the person single person object using the name they entered.
+//   // TODO: find the person single person object using the name they entered.
   return foundPerson;
 }
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
-function searchByEyeColor(people){
+// function searchByEyeColor(people){
+//   let eyeColorSearch = promptFor("What eye colored person list you searching for?", nameValidation);
+//   let foundPerson = people.filter(function(potentialMatch){
+//     if(potentialMatch.eyeColor === eyeColorSearch){
+//       return true;
+//     }
+//     else{
+//       return false;
+//     }
+//   })
+//   // TODO: find the person single person object using the name they entered.
+//   return foundPerson;
+// }
 
-}
 
 //TODO: add other trait filter functions here.
 
@@ -133,7 +145,7 @@ function promptFor(question, valid){
   do{
     response = prompt(question).trim();
     isValid = valid(response);
-  } while(response !== ""  ||  isValid === false)
+  } while(response === ""  ||  isValid === false)
   return response
 }
 
@@ -153,6 +165,18 @@ function autoValid(input){
   return true; // default validation only
 }
 
+// helper function to validate the name input
+
+function nameValidation(input){
+
+if(input != null && typeof input === "string" && input.length > 1 && isNaN(parseFloat(input)) ){
+  return true;
+}
+else{
+  return false;
+}
+}
+//
 //Unfinished validation function you can use for any of your custom validation callbacks.
 //can be used for things like eye color validation for example.
 function customValidation(input){
