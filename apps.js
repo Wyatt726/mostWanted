@@ -8,16 +8,39 @@
 
 // app is the function called to start the entire application
 function app(people){
-  let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+ 
+  console.log (" Enter 1 for search by Last  Name \n", "Enter 2 for search by First Name \n",
+  "Enter 3 for search by  EyeColor \n","Enter 4 for search by  Occupation\n",
+  "Enter 5 for search by Gender \n", "Enter 6 for search by First name and Last Name \n" , "Enter 7 for search by EyeColor Occupation and Gender \n", "Enter 8 to quite");
+  let searchType = promptFor( " Enter your choice from the menu");
+  
   let searchResults;
   switch(searchType){
-    case 'yes':
-      searchResults = searchByName(people);
-      //searchResults = searchByEyeColor(people);
+    case "1":
+      searchResults = searchByLastName(people);
       break;
-    case 'no':
-      // TODO: search by traits
+    case "2":
+      searchResults = searchByFirstName(people); 
+      break;    
+    case "3":
+      searchResults = searchByEyeColor(people);
       break;
+    case "4":
+      searchResults = searchByOccupation(people);
+      break;
+    case "5":
+      searchResults = searchByGender(people);
+      break;
+    case "6":
+      searchResults = searchByFirstAndLastName(people);
+      break;
+    case "7":
+      searchResults = searchByEyeAndOccupationAndGender(people);
+      break;
+    case "8":  
+       console.log("Thank you for using this program")
+    return;
+    
       default:
     app(people); // restart app
       break;
@@ -37,26 +60,34 @@ function mainMenu(person, people){
     return app(people); // restart
   }
 
-  let displayOption = promptFor("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid);
 
-  switch(displayOption){
-    case "info":
-    // TODO: get person's info
-    break;
-    case "family":
-    // TODO: get person's family
-    break;
-    case "descendants":
-    // TODO: get person's descendants
-    break;
-    case "restart":
-    app(people); // restart
-    break;
-    case "quit":
-    return; // stop execution
-    default:
-    return mainMenu(person, people); // ask again
-  }
+ let displayOption;
+ 
+    for (let i = 0; i < person.length; i++) {
+    displayOption = promptFor("Found " + person[i].firstName + " " + person[i].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid);
+    let foundList = person[i].firstName ;
+    console.log (foundList + " ");
+     }
+
+  // switch(displayOption){
+  //   case "info":
+  //   // TODO: get person's info
+  //   break;
+  //   case "family":
+  //   // TODO: get person's family
+  //   break;
+  //   case "descendants":searchResults
+  //   // TODO: get person's descendants
+  //   break;
+  //   case "restart":
+  //   app(people); // restart
+  //   break;
+  //   case "quit":
+  //   return; // stop execution
+  //   default:
+  //   return mainMenu(person, people); // ask again
+  // }
+  return mainMenu(person, people); // ask again
 }
 
 //#endregion
@@ -66,43 +97,139 @@ function mainMenu(person, people){
 /////////////////////////////////////////////////////////////////
 //#region 
 
+
+
 //nearly finished function used to search through an array of people to find matching first and last name and return a SINGLE person object.
-function searchByName(people){
-  let firstName = promptFor("What is the person's first name?", nameValidation);
-  let lastName = promptFor("What is the person's last name?", nameValidation);
+// function searchByName(people){
+//   let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+//   let firstName = promptFor("What is the person's first name?", autoValid);
+//   let lastName = promptFor("What is the person's last name?", autoValid);
 
-  let foundPerson = people.filter(function(potentialMatch){
-    if(potentialMatch.firstName === firstName && potentialMatch.lastName === lastName){
-      return true;
-    }
-    else{
-      return false;
-    }
-  })
-//   // TODO: find the person single person object using the name they entered.
-  return foundPerson;
-}
-
-// unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
-// function searchByEyeColor(people){
-//   let eyeColorSearch = promptFor("What eye colored person list you searching for?", nameValidation);
 //   let foundPerson = people.filter(function(potentialMatch){
-//     if(potentialMatch.eyeColor === eyeColorSearch){
+//     if(potentialMatch.firstName === firstName && potentialMatch.lastName === lastName){
 //       return true;
 //     }
 //     else{
 //       return false;
 //     }
 //   })
-//   // TODO: find the person us
-//   return foundPerson;
+// //   // TODO: find the person single person object using the name they entered.
+//   return foundPerson[0];
 // }
+
+// function to search through an array of people to find matching last name
+function searchByLastName(people){
+  let occupationSearch = promptFor("What is the Last Name you searching for?", autoValid);
+  let foundPeople = people.filter(function(potentialMatch){
+    if(potentialMatch.lastName == occupationSearch){
+      return true;
+    }
+    else{
+      return false;
+    }
+   
+ })
+  // TODO: find the person us
+  return foundPeople;
+  
+}
+
+
+// function to search through an array of people to find matching first name
+function searchByFirstName(people){
+  let occupationSearch = promptFor("What is the First Name you searching for?", autoValid);
+  let foundPeople = people.filter(function(potentialMatch){
+    if(potentialMatch.firstName == occupationSearch){
+      return true;
+    }
+    else{
+      return false;
+    }
+   
+ })
+  // TODO: find the person us
+  return foundPeople;
+  
+}
+
+
+// unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
+  function searchByEyeColor(people){
+  let eyeColorSearch = promptFor("What eye colored person list you searching for?", autoValid);
+  let foundPeople = people.filter(function(potentialMatch){
+    if(potentialMatch.eyeColor == eyeColorSearch){
+      return true;
+    }
+    else{
+      return false;
+    }
+   
+ })
+  // TODO: find the person us
+  return foundPeople;
+  
+}
 
 
 //TODO: add other trait filter functions here.
 
 
 
+// function to search through an array of people to find matching Occupation
+function searchByOccupation(people){
+  let occupationSearch = promptFor("What Occupation person list you searching for?", autoValid);
+  let foundPeople = people.filter(function(potentialMatch){
+    if(potentialMatch.occupation == occupationSearch){
+      return true;
+    }
+    else{
+      return false;
+    }
+   
+ })
+  // TODO: find the person us
+  return foundPeople;
+  
+}
+
+
+
+// function to search through an array of people to find matching Occupation
+function searchByGender(people){
+  let genderSearch = promptFor("What gender person list you searching for?", autoValid);
+  let foundPeople = people.filter(function(potentialMatch){
+    if(potentialMatch.gender == genderSearch){
+      return true;
+    }
+    else{
+      return false;
+    }
+   
+ })
+  // TODO: find the person us
+  return foundPeople;
+  
+}
+
+
+function searchByFirstAndLastName(people){
+  let lastNameFunction = searchByLastName(people);
+  let lastAndFirstNameFunction = searchByFirstName(lastNameFunction);
+  return lastAndFirstNameFunction ;
+
+
+}
+
+
+
+function searchByEyeAndOccupationAndGender(people){
+  let eyeColorFunction = searchByEyeColor(people);
+  let eyeColorAndgenderFunction = searchByGender(eyeColorFunction);
+  let eyeGenderAndOccupationFunction = searchByOccupation(eyeColorAndgenderFunction);
+  return eyeGenderAndOccupationFunction;
+}
+
+// 
 //#endregion
 
 //Display functions.
@@ -144,7 +271,8 @@ function promptFor(question, valid){
   let isValid;
   do{
     response = prompt(question).trim();
-    isValid = valid(response);
+    isValid = true;
+    //isValid = valid(response);
   } while(response === ""  ||  isValid === false)
   return response
 }
@@ -167,15 +295,15 @@ function autoValid(input){
 
 // helper function to validate the name input
 
-function nameValidation(input){
+// function nameValidation(input){
 
-if(input != null && typeof input === "string" && input.length > 1 && isNaN(parseFloat(input)) ){
-  return true;
-}
-else{
-  return false;
-}
-}
+// if(input != null && typeof input === "string" && input.length > 0 && isNaN(parseFloat(input)) ){
+//   return true;
+// }
+// else{
+//   return false;
+// }
+// }
 //
 //Unfinished validation function you can use for any of your custom validation callbacks.
 //can be used for things like eye color validation for example.
