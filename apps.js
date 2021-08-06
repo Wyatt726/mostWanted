@@ -50,6 +50,10 @@ function app(people){
   mainMenu(searchResults, people);
 }
 
+
+
+
+
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
 
@@ -61,7 +65,8 @@ function mainMenu(person, people){
   }
 
 
- let displayOption;
+
+    let displayOption;
  
     for (let i = 0; i < person.length; i++) {
     displayOption = promptFor("Found " + person[i].firstName + " " + person[i].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid);
@@ -71,7 +76,7 @@ function mainMenu(person, people){
 
   // switch(displayOption){
   //   case "info":
-  //   // TODO: get person's info
+  //   // TODO: get person's info 
   //   break;
   //   case "family":
   //   // TODO: get person's family
@@ -88,6 +93,7 @@ function mainMenu(person, people){
   //   return mainMenu(person, people); // ask again
   // }
   return mainMenu(person, people); // ask again
+
 }
 
 //#endregion
@@ -96,6 +102,7 @@ function mainMenu(person, people){
 //Ideally you will have a function for each trait.
 /////////////////////////////////////////////////////////////////
 //#region 
+
 
 
 
@@ -153,8 +160,11 @@ function searchByFirstName(people){
 }
 
 
+
+
 // unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
-  function searchByEyeColor(people){
+function searchByEyeColor(people){
+
   let eyeColorSearch = promptFor("What eye colored person list you searching for?", autoValid);
   let foundPeople = people.filter(function(potentialMatch){
     if(potentialMatch.eyeColor == eyeColorSearch){
@@ -163,6 +173,7 @@ function searchByFirstName(people){
     else{
       return false;
     }
+
    
  })
   // TODO: find the person us
@@ -175,9 +186,12 @@ function searchByFirstName(people){
 
 
 
-// function to search through an array of people to find matching Occupation
+
+
+
+// occupation search
 function searchByOccupation(people){
-  let occupationSearch = promptFor("What Occupation person list you searching for?", autoValid);
+  let occupationSearch = promptFor("What occupation does the person you are looking for do?", autoValid);
   let foundPeople = people.filter(function(potentialMatch){
     if(potentialMatch.occupation == occupationSearch){
       return true;
@@ -185,12 +199,11 @@ function searchByOccupation(people){
     else{
       return false;
     }
-   
  })
-  // TODO: find the person us
-  return foundPeople;
-  
+
+ return foundPeople;
 }
+      
 
 
 
@@ -230,7 +243,7 @@ function searchByEyeAndOccupationAndGender(people){
 }
 
 // 
-//#endregion
+
 
 //Display functions.
 //Functions for user interface.
@@ -297,7 +310,7 @@ function autoValid(input){
 
 // function nameValidation(input){
 
-// if(input != null && typeof input === "string" && input.length > 0 && isNaN(parseFloat(input)) ){
+// if(input != null && typeof input === "string" && input.length > 1 && isNaN(parseFloat(input)) ){
 //   return true;
 // }
 // else{
@@ -308,7 +321,5 @@ function autoValid(input){
 //Unfinished validation function you can use for any of your custom validation callbacks.
 //can be used for things like eye color validation for example.
 function customValidation(input){
-  
-}
 
-//#endregion
+}
