@@ -41,11 +41,7 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-      function getValue() {
-        return localStorage.getItem('id, dob, gender, height, weight, eyeColor,occupation');
-      } // Gets the value of 'nameOfItem' and returns it
-      console.log(getValue()); //'value';
-
+      //todo ger persons info
     break;
     case "family":
     // TODO: get person's family
@@ -88,64 +84,51 @@ function searchByName(people){
 }
 
 // unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
-// function searchByEyeColor(people){
-//   let eyeColorSearch = promptFor("What eye colored person list you searching for?", nameValidation);
-//   let foundPerson = people.filter(function(potentialMatch){
-//     if(potentialMatch.eyeColor === eyeColorSearch){
-//       return true;
-//     }
-//     else{
-//       return false;
-//     }
-//   })
-//   // TODO: find the person us
-//   return foundPerson;
-// }
+function searchByEyeColor(people){
+  let eyeColorSearch = promptFor("What eye colored person list you searching for?", autoValid);
+  let foundPeople = people.filter(function(potentialMatch){
+    if(potentialMatch.eyeColor == eyeColorSearch){
+      return true;
+    }
+    else{
+      return false;
+    }
+ })
 
 // gender search
-// function searchByGender(people){
-//   let genderSearch = promptFor("What gender is the person you are searching for?", nameValidation);
-//   let foundPerson = people.filter(function(potentialMatch){
-//     if(potentialMatch.gender === genderSearch){
-//       return true;
-//     }
-//     else{
-//       return false;
-//     }
-//   })
-//   // TODO: find the person us
-//   return foundPerson;
-// }
-
+function searchGender(people){
+  let searchGender = promptFor("What gender is the person you are looking for?", autoValid);
+  let foundPeople = people.filter(function(potentialMatch){
+    if(potentialMatch.gender ==searchGender){
+      return true;
+    }
+    else{
+      return false;
+    }
+ })
 // occupation search
-// function searchByOccupation(people){
-//   let occupationSearch = promptFor("What occupation does the person youre looking for have?", nameValidation);
-//   let foundPerson = people.filter(function(potentialMatch){
-//     if(potentialMatch.occupation === occupationSearch){
-//       return true;
-//     }
-//     else{
-//       return false;
-//     }
-//   })
-//   // TODO: find the person us
-//   return foundPerson;
-// }
+function searchByOccupation(people){
+  let occupationSearch = promptFor("What occupation does the person you are looking for do?", autoValid);
+  let foundPeople = people.filter(function(potentialMatch){
+    if(potentialMatch.occupation == occupationSearch){
+      return true;
+    }
+    else{
+      return false;
+    }
+ })
 
 // ID search
-// function searchByID(people){
-//   let occupationSearch = promptFor("What ID number does the person youre searcing for have?", nameValidation);
-//   let foundPerson = people.filter(function(potentialMatch){
-//     if(potentialMatch.ID === occupationSearch){
-//       return true;
-//     }git
-//     else{
-//       return false;
-//     }
-//   })
-//   // TODO: find the person us
-//   return foundPerson;
-// }
+function searchById(people){
+  let idSearch = promptFor("What is the persons id number you are looking for?", autoValid);
+  let foundPeople = people.filter(function(potentialMatch){
+    if(potentialMatch.occupation == idSearch){
+      return true;
+    }
+    else{
+      return false;
+    }
+ })
 //#endregion
 
 //Display functions.
