@@ -38,9 +38,12 @@ function app(people){
       searchResults = searchByEyeAndOccupationAndGender(people);
       break;
     case "8":  
-       console.log("Thank you for using this program")
-    return;
-    
+     // searchResults = searchById(people);
+     searchResults = displyDescendants(people)
+      break;   
+    case "9":        
+      console.log("Thank you for using this program")     
+      return;
       default:
     app(people); // restart app
       break;
@@ -67,31 +70,40 @@ function mainMenu(person, people){
 
 
     let displayOption;
+    displayOption = promptFor("Found " + person[0].firstName + " " + person[0].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid);
  
     for (let i = 0; i < person.length; i++) {
-    displayOption = promptFor("Found " + person[i].firstName + " " + person[i].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid);
+    
     let foundList = person[i].firstName ;
-    console.log (foundList + " ");
+    let foundLists = foundList;
+    console.log (foundLists + " ");
+    
+      break;
+    
      }
 
-  // switch(displayOption){
-  //   case "info":
-  //   // TODO: get person's info 
-  //   break;
-  //   case "family":
-  //   // TODO: get person's family
-  //   break;
-  //   case "descendants":searchResults
-  //   // TODO: get person's descendants
-  //   break;
-  //   case "restart":
-  //   app(people); // restart
-  //   break;
-  //   case "quit":
-  //   return; // stop execution
-  //   default:
-  //   return mainMenu(person, people); // ask again
-  // }
+  switch(displayOption){
+    case "info":
+    // TODO: get person's info 
+    displayOption = displayPerson(person);
+    break;
+    case "family":
+    // TODO: get person's family
+    displayOption = displayFamily(person);
+    
+    break;
+    case "descendants":
+    displayOption = displayParentChild (person);
+    // TODO: get person's descendants
+    break;
+    case "restart":
+    app(people); // restart
+    break;
+    case "quit":
+    return; // stop execution
+    default:
+    return mainMenu(person, people); // ask again
+  }
   return mainMenu(person, people); // ask again
 
 }
@@ -224,6 +236,24 @@ function searchByGender(people){
   
 }
 
+let idSearch;
+// function to search through an array of people to find matching ID
+function searchById(people){
+   idSearch = promptFor("What is the ID number you searching for?", autoValid);
+  let foundPeople = people.filter(function(potentialMatch){
+    if(potentialMatch.id == idSearch){
+      return true;
+    }
+    else{
+      return false;
+    }
+   
+ })
+  // TODO: find the person us
+  return foundPeople;
+  
+}
+
 
 function searchByFirstAndLastName(people){
   let lastNameFunction = searchByLastName(people);
@@ -257,14 +287,72 @@ function displayPeople(people){
   }).join("\n"));
 }
 
-function displayPerson(person){
+function displayPerson(people){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
-  let personInfo = "First Name: " + person.firstName + "\n";
-  personInfo += "Last Name: " + person.lastName + "\n";
+  let personInfo = "First Name: " + people[0].firstName + "\n";
+  personInfo += "Last Name: " + people[0].lastName + "\n";
+  personInfo += "ID: " + people[0].id + "\n";
+  personInfo += "Gender: " + people[0].gender + "\n";
+  personInfo += "Date Of Birth: " + people[0].dob + "\n";
+  personInfo += "Height: " + people[0].height + "\n";
+  personInfo += "Weight: " + people[0].weight + "\n";
+  personInfo += "Eye Color: " + people[0].eyeColor + "\n";
+  personInfo += "Occupation: " + people[0].occupation + "\n";
   // TODO: finish getting the rest of the information to display.
   alert(personInfo);
+
+  return personInfo;
 }
+
+function displayFamily(people){
+  // print all of the information about a person:
+  // height, weight, age, name, occupation, eye color.
+  let familyInfo = "Parents Name: " + people[0].parents + "\n";
+  familyInfo += "Spouse Name: " + people[0].currentSpouse + "\n";
+  familyInfo += "Children Name: " + "in progress";
+  // TODO: finish getting the rest of the information to display.
+  alert(familyInfo);
+
+  return familyInfo;
+}
+
+let parentsList = [""];
+let parentsList2 = [""][""];
+function displyDescendants(people){
+  alert(people.map(function(person){
+  parentsList = person.parents; 
+
+    if (parentsList.length > 0){ 
+      let parentList2 = person.parents;
+    console.log (parentList2.parents)
+  }
+   
+  //console.log(parentsList);
+
+  return parentsList2;
+    
+  }));
+}
+
+
+let theParent;
+let theChild;
+
+function displayParentChild (people){
+   let foundPeople2 = people.filter(function(person){
+    for (let i = 0; i < people.length; i++){
+        if(people[i].parent ==person.id){
+      theChild = people[i];
+      console.log( potentialMatch + "is a parent of" + theChild ); 
+        }
+      
+    }
+   })
+  return theChild;
+}
+
+
 
 //#endregion
 
