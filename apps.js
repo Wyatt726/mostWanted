@@ -8,16 +8,42 @@
 
 // app is the function called to start the entire application
 function app(people){
-  let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+ 
+  console.log (" Enter 1 for search by Last  Name \n", "Enter 2 for search by First Name \n",
+  "Enter 3 for search by  EyeColor \n","Enter 4 for search by  Occupation\n",
+  "Enter 5 for search by Gender \n", "Enter 6 for search by First name and Last Name \n" , "Enter 7 for search by EyeColor Occupation and Gender \n", "Enter 8 to quite");
+  let searchType = promptFor( " Enter your choice from the menu");
+  
   let searchResults;
   switch(searchType){
-    case 'yes':
-      searchResults = searchByName(people);
-      //searchResults = searchByEyeColor(people);
+    case "1":
+      searchResults = searchByLastName(people);
       break;
-    case 'no':
-      // TODO: search by traits
+    case "2":
+      searchResults = searchByFirstName(people); 
+      break;    
+    case "3":
+      searchResults = searchByEyeColor(people);
       break;
+    case "4":
+      searchResults = searchByOccupation(people);
+      break;
+    case "5":
+      searchResults = searchByGender(people);
+      break;
+    case "6":
+      searchResults = searchByFirstAndLastName(people);
+      break;
+    case "7":
+      searchResults = searchByEyeAndOccupationAndGender(people);
+      break;
+    case "8":  
+     // searchResults = searchById(people);
+     searchResults = displyDescendants(people)
+      break;   
+    case "9":        
+      console.log("Thank you for using this program")     
+      return;
       default:
     app(people); // restart app
       break;
@@ -26,6 +52,10 @@ function app(people){
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
   mainMenu(searchResults, people);
 }
+
+
+
+
 
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
@@ -37,16 +67,33 @@ function mainMenu(person, people){
     return app(people); // restart
   }
 
-  let displayOption = promptFor("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid);
+
+
+    let displayOption;
+    displayOption = promptFor("Found " + person[0].firstName + " " + person[0].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'", autoValid);
+ 
+    for (let i = 0; i < person.length; i++) {
+    
+    let foundList = person[i].firstName ;
+    let foundLists = foundList;
+    console.log (foundLists + " ");
+    
+      break;
+    
+     }
 
   switch(displayOption){
     case "info":
-      //todo ger persons info
+    // TODO: get person's info 
+    displayOption = displayPerson(person);
     break;
     case "family":
     // TODO: get person's family
+    displayOption = displayFamily(person);
+    
     break;
     case "descendants":
+    displayOption = displayParentChild (person);
     // TODO: get person's descendants
     break;
     case "restart":
@@ -57,6 +104,8 @@ function mainMenu(person, people){
     default:
     return mainMenu(person, people); // ask again
   }
+  return mainMenu(person, people); // ask again
+
 }
 
 //#endregion
@@ -66,46 +115,92 @@ function mainMenu(person, people){
 /////////////////////////////////////////////////////////////////
 //#region 
 
-//nearly finished function used to search through an array of people to find matching first and last name and return a SINGLE person object.
-function searchByName(people){
-  let firstName = promptFor("What is the person's first name?", nameValidation);
-  let lastName = promptFor("What is the person's last name?", nameValidation);
 
-  let foundPerson = people.filter(function(potentialMatch){
-    if(potentialMatch.firstName === firstName && potentialMatch.lastName === lastName){
+
+
+//nearly finished function used to search through an array of people to find matching first and last name and return a SINGLE person object.
+// function searchByName(people){
+//   let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+//   let firstName = promptFor("What is the person's first name?", autoValid);
+//   let lastName = promptFor("What is the person's last name?", autoValid);
+
+//   let foundPerson = people.filter(function(potentialMatch){
+//     if(potentialMatch.firstName === firstName && potentialMatch.lastName === lastName){
+//       return true;
+//     }
+//     else{
+//       return false;
+//     }
+//   })
+// //   // TODO: find the person single person object using the name they entered.
+//   return foundPerson[0];
+// }
+
+// function to search through an array of people to find matching last name
+function searchByLastName(people){
+  let occupationSearch = promptFor("What is the Last Name you searching for?", autoValid);
+  let foundPeople = people.filter(function(potentialMatch){
+    if(potentialMatch.lastName == occupationSearch){
       return true;
     }
     else{
       return false;
     }
-  })
-//   // TODO: find the person single person object using the name they entered.
-  return foundPerson;
+   
+ })
+  // TODO: find the person us
+  return foundPeople;
+  
 }
 
-// unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
-function searchByEyeColor(people){
-  let eyeColorSearch = promptFor("What eye colored person list you searching for?", autoValid);
+
+// function to search through an array of people to find matching first name
+function searchByFirstName(people){
+  let occupationSearch = promptFor("What is the First Name you searching for?", autoValid);
   let foundPeople = people.filter(function(potentialMatch){
-    if(potentialMatch.eyeColor == eyeColorSearch){
+    if(potentialMatch.firstName == occupationSearch){
       return true;
 }
    else{
       return false;
     }
+   
  })
+  // TODO: find the person us
+  return foundPeople;
+  
+}
 
-// gender search
-function searchGender(people){
-  let searchGender = promptFor("What gender is the person you are looking for?", autoValid);
+
+
+
+// unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
+function searchByEyeColor(people){
+
+  let eyeColorSearch = promptFor("What eye colored person list you searching for?", autoValid);
   let foundPeople = people.filter(function(potentialMatch){
-    if(potentialMatch.gender ==searchGender){
+    if(potentialMatch.eyeColor == eyeColorSearch){
       return true;
     }
     else{
       return false;
     }
+
+   
  })
+  // TODO: find the person us
+  return foundPeople;
+  
+}
+
+
+//TODO: add other trait filter functions here.
+
+
+
+
+
+
 // occupation search
 function searchByOccupation(people){
   let occupationSearch = promptFor("What occupation does the person you are looking for do?", autoValid);
@@ -118,18 +213,67 @@ function searchByOccupation(people){
     }
  })
 
-// ID search
-function searchById(people){
-  let idSearch = promptFor("What is the persons id number you are looking for?", autoValid);
+ return foundPeople;
+}
+      
+
+
+
+// function to search through an array of people to find matching Occupation
+function searchByGender(people){
+  let genderSearch = promptFor("What gender person list you searching for?", autoValid);
   let foundPeople = people.filter(function(potentialMatch){
-    if(potentialMatch.occupation == idSearch){
+    if(potentialMatch.gender == genderSearch){
       return true;
     }
     else{
       return false;
     }
+   
  })
-//#endregion
+  // TODO: find the person us
+  return foundPeople;
+  
+}
+
+let idSearch;
+// function to search through an array of people to find matching ID
+function searchById(people){
+   idSearch = promptFor("What is the ID number you searching for?", autoValid);
+  let foundPeople = people.filter(function(potentialMatch){
+    if(potentialMatch.id == idSearch){
+      return true;
+    }
+    else{
+      return false;
+    }
+   
+ })
+  // TODO: find the person us
+  return foundPeople;
+  
+}
+
+
+function searchByFirstAndLastName(people){
+  let lastNameFunction = searchByLastName(people);
+  let lastAndFirstNameFunction = searchByFirstName(lastNameFunction);
+  return lastAndFirstNameFunction ;
+
+
+}
+
+
+
+function searchByEyeAndOccupationAndGender(people){
+  let eyeColorFunction = searchByEyeColor(people);
+  let eyeColorAndgenderFunction = searchByGender(eyeColorFunction);
+  let eyeGenderAndOccupationFunction = searchByOccupation(eyeColorAndgenderFunction);
+  return eyeGenderAndOccupationFunction;
+}
+
+// 
+
 
 //Display functions.
 //Functions for user interface.
@@ -143,14 +287,72 @@ function displayPeople(people){
   }).join("\n"));
 }
 
-function displayPerson(person){
+function displayPerson(people){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
-  let personInfo = "First Name: " + person.firstName + "\n";
-  personInfo += "Last Name: " + person.lastName + "\n";
+  let personInfo = "First Name: " + people[0].firstName + "\n";
+  personInfo += "Last Name: " + people[0].lastName + "\n";
+  personInfo += "ID: " + people[0].id + "\n";
+  personInfo += "Gender: " + people[0].gender + "\n";
+  personInfo += "Date Of Birth: " + people[0].dob + "\n";
+  personInfo += "Height: " + people[0].height + "\n";
+  personInfo += "Weight: " + people[0].weight + "\n";
+  personInfo += "Eye Color: " + people[0].eyeColor + "\n";
+  personInfo += "Occupation: " + people[0].occupation + "\n";
   // TODO: finish getting the rest of the information to display.
   alert(personInfo);
+
+  return personInfo;
 }
+
+function displayFamily(people){
+  // print all of the information about a person:
+  // height, weight, age, name, occupation, eye color.
+  let familyInfo = "Parents Name: " + people[0].parents + "\n";
+  familyInfo += "Spouse Name: " + people[0].currentSpouse + "\n";
+  familyInfo += "Children Name: " + "in progress";
+  // TODO: finish getting the rest of the information to display.
+  alert(familyInfo);
+
+  return familyInfo;
+}
+
+let parentsList = [""];
+let parentsList2 = [""][""];
+function displyDescendants(people){
+  alert(people.map(function(person){
+  parentsList = person.parents; 
+
+    if (parentsList.length > 0){ 
+      let parentList2 = person.parents;
+    console.log (parentList2.parents)
+  }
+   
+  //console.log(parentsList);
+
+  return parentsList2;
+    
+  }));
+}
+
+
+let theParent;
+let theChild;
+
+function displayParentChild (people){
+   let foundPeople2 = people.filter(function(person){
+    for (let i = 0; i < people.length; i++){
+        if(people[i].parent ==person.id){
+      theChild = people[i];
+      console.log( potentialMatch + "is a parent of" + theChild ); 
+        }
+      
+    }
+   })
+  return theChild;
+}
+
+
 
 //#endregion
 
@@ -170,7 +372,8 @@ function promptFor(question, valid){
   let isValid;
   do{
     response = prompt(question).trim();
-    isValid = valid(response);
+    isValid = true;
+    //isValid = valid(response);
   } while(response === ""  ||  isValid === false)
   return response
 }
@@ -193,15 +396,15 @@ function autoValid(input){
 
 // helper function to validate the name input
 
-function nameValidation(input){
+// function nameValidation(input){
 
-if(input != null && typeof input === "string" && input.length > 1 && isNaN(parseFloat(input)) ){
-  return true;
-}
-else{
-  return false;
-}
-}
+// if(input != null && typeof input === "string" && input.length > 1 && isNaN(parseFloat(input)) ){
+//   return true;
+// }
+// else{
+//   return false;
+// }
+// }
 //
 //Unfinished validation function you can use for any of your custom validation callbacks.
 //can be used for things like eye color validation for example.
