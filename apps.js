@@ -89,8 +89,8 @@ function searchByEyeColor(people){
   let foundPeople = people.filter(function(potentialMatch){
     if(potentialMatch.eyeColor == eyeColorSearch){
       return true;
-    }
-    else{
+}
+   else{
       return false;
     }
  })
@@ -112,7 +112,7 @@ function searchByOccupation(people){
   let foundPeople = people.filter(function(potentialMatch){
     if(potentialMatch.occupation == occupationSearch){
       return true;
-    }
+}
     else{
       return false;
     }
@@ -206,7 +206,6 @@ else{
 //Unfinished validation function you can use for any of your custom validation callbacks.
 //can be used for things like eye color validation for example.
 function customValidation(input){
-  
+
 }
 
-//#endregion
